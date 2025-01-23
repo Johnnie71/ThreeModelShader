@@ -47,6 +47,14 @@ rgbeLoader.load('./aerodynamics_workshop.hdr', (environmentMap) =>
 // const geometry = new THREE.IcosahedronGeometry(2.5, 5)
 
 // Material
+const uniforms = {
+    uSliceStart: new THREE.Uniform(1.75),
+    uSliceArc: new THREE.Uniform(1.25)
+}
+
+gui.add(uniforms.uSliceStart, 'value', - Math.PI, Math.PI, 0.001).name('uSliceStart')
+gui.add(uniforms.uSliceArc, 'value', 0, Math.PI * 2, 0.001).name('uSliceArc')
+
 const material = new THREE.MeshStandardMaterial({
     metalness: 0.5,
     roughness: 0.25,
@@ -62,6 +70,7 @@ const slicedMaterial = new CustomShaderMaterial({
     metalness: 0.5,
     roughness: 0.25,
     envMapIntensity: 0.5,
+    uniforms: uniforms,
     color: '#858080'
 })
 
